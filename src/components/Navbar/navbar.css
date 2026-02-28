@@ -78,4 +78,8 @@
   .navbar ul {
     display: none;
   }
+
+  .navbar button img {
+    width: 12px;
+  }
 }

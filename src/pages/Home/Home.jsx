@@ -1,10 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import "./home.css";
 import { CoinContext } from "../../context/CoinContext";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { allCoin, currency } = useContext(CoinContext);
   const [displayCoin, setDisplayCoin] = useState([]);
+  const [input, setInput] = useState("");
+
+  const inputHandler = (event) => {
+    setInput(event.target.value);
+    if (event.target.value === "") {
+      setDisplayCoin(allCoin);
+    }
+  };
+
+  const searchHandler = async (event) => {
+    event.preventDefault();
+    const coins = await allCoin.filter((item) => {
+      return item.name.toLowerCase().includes(input.toLowerCase());
+    });
+    setDisplayCoin(coins);
+  };
 
   useEffect(() => {
     setDisplayCoin(allCoin);
@@ -20,8 +37,20 @@ const Home = () => {
           Bienvenido al mayor marketplace de criptomonedas. Regístrate para
           explorar más sobre criptos.
         </p>
-        <form>
-          <input type="text" placeholder="Buscar criptomoneda" />
+        <form onSubmit={searchHandler}>
+          <input
+            onChange={inputHandler}
+            list="coinlist"
+            value={input}
+            type="text"
+            placeholder="Buscar criptomoneda"
+            required
+          />
+          <datalist id="coinlist">
+            {allCoin.map((item, index) => (
+              <option key={index} value={item.name} />
+            ))}
+          </datalist>
           <button type="submit">Buscar</button>
         </form>
       </div>
@@ -34,7 +63,7 @@ const Home = () => {
           <p className="market-cap">Capitalización Mercado</p>
         </div>
         {displayCoin.slice(0, 10).map((item, index) => (
-          <div className="table-layout" key={index}>
+          <Link to={`/coin/${item.id}`} className="table-layout" key={index}>
             <p>{item.market_cap_rank}</p>
             <div>
               <img src={item.image} alt="" />
@@ -52,7 +81,7 @@ const Home = () => {
               {currency.symbol}
               {item.market_cap.toLocaleString()}
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
