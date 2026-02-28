@@ -1,10 +1,10 @@
 # 🪙 CryptoPlace
 
-CryptoPlace is a cryptocurrency price tracking web application built with **React + Vite**. It consumes the **CoinGecko API** to display real-time cryptocurrency prices and detailed information for each coin.
+CryptoPlace es una aplicación web de seguimiento de precios de criptomonedas construida con React + Vite. Consume la API de CoinGecko para mostrar precios de criptomonedas en tiempo real e información detallada de cada moneda.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Stack Tecnológico
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
